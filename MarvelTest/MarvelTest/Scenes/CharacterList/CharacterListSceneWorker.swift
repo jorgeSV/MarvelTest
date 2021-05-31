@@ -10,10 +10,11 @@ import UIKit
 class CharacterListSceneWorker {
   
     func getCharacters(request: CharacterModel.List.Request,
+                       extraID: Int? = nil,
                        onSuccess: @escaping (PaginatedList<Character>) -> Void,
                        onError: @escaping (Error) -> Void) {
         
-        GeneralApi.getCharacters(request: request, onSuccess: { (list) in
+        GeneralApi.getCharacters(request: request, extraID: extraID, onSuccess: { (list) in
             onSuccess(list)
         }) { (error) in
             onError(error)

@@ -11,7 +11,7 @@ import Alamofire
 
 class Utils {
 
-    static func MD5(string: String) -> String {
+    static private func MD5(string: String) -> String {
         let digest = Insecure.MD5.hash(data: string.data(using: .utf8) ?? Data())
 
         return digest.map {
@@ -28,5 +28,24 @@ class Utils {
                                    "hash" : Utils.MD5(string: strHash)]
         
         return params
+    }
+    
+    static func mergeWithGeneralApiParameters(requestParams:inout Dictionary<String, Any>) -> Parameters {
+        
+        var params = requestParams
+        params.merge(dict: generalApiParameters())
+        
+        return params
+    }
+    
+    static func completeUrlWithEndpoint(endpoint: String, extraID: Int? = nil) -> String {
+        
+        let url = Constants.API_BASE_URL + endpoint
+        
+        if let extraID = extraID {
+            return url + "/" + String.init(extraID)
+        }
+        
+        return url
     }
 }

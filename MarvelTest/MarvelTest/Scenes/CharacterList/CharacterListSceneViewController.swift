@@ -91,7 +91,7 @@ extension CharacterListSceneViewController {
         self.tableView.register(UINib(nibName: "LoadingTableViewCell", bundle: nil), forCellReuseIdentifier: "LoadingTableViewCell")
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.rowHeight = Constants.CELL_SIMPLE_ROW_HEIGHT
+        self.tableView.estimatedRowHeight = Constants.CELL_SIMPLE_ROW_HEIGHT
     }
 }
 
@@ -127,9 +127,13 @@ extension CharacterListSceneViewController {
     
     func displayError(error: Error) {
         
-        self.view.isSkeletonable = false
         self.hideProgress()
-        print("Error in characters endpoint")
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        
+        self.showError(error: error)
     }
 }
 
@@ -171,7 +175,11 @@ extension CharacterListSceneViewController: UITableViewDelegate, SkeletonTableVi
         
         let characterModel = self.characters[indexPath.row]
         
-        cell.setImageView(path: characterModel.path, ext: characterModel.ext, andTitle: characterModel.title, andDescription: characterModel.desc)
+        cell.setImageView(path: characterModel.path,
+                          ext: characterModel.ext,
+                          andTitle: characterModel.title,
+                          andDescription: !characterModel.desc.isEmpty ? characterModel.desc :
+                            characterModel.opt)
         
         return cell
     }
@@ -187,7 +195,8 @@ extension CharacterListSceneViewController: UITableViewDelegate, SkeletonTableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let character = self.characters[indexPath.row]
+        self.interactor?.selectCharacter(position: indexPath.row)
         self.tableView.deselectRow(at: indexPath, animated: true)
+        self.performSegue(withIdentifier: "CharacterDetail", sender: nil)
     }
 }

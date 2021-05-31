@@ -9,17 +9,20 @@ import UIKit
 
 protocol CharacterListSceneBusinessLogic {
     func fetchCharacters(request: CharacterModel.List.Request)
+    func selectCharacter(position: Int)
 }
 
 protocol CharacterListSceneDataStore {
     var characterList: [Character] { get set }
+    var selectedCharacter: Character? { get set }
 }
 
 class CharacterListSceneInteractor: CharacterListSceneBusinessLogic, CharacterListSceneDataStore {
-  
+    
     var presenter: CharacterListScenePresentationLogic?
     var worker = CharacterListSceneWorker()
     var characterList: [Character] = []
+    var selectedCharacter: Character? = nil
   
     // MARK: Fetchs
   
@@ -40,5 +43,9 @@ class CharacterListSceneInteractor: CharacterListSceneBusinessLogic, CharacterLi
         }, onError: { error in
             self.presenter?.presentError(error: error)
         })
+    }
+    
+    func selectCharacter(position: Int) {
+        self.selectedCharacter = characterList[position]
     }
 }

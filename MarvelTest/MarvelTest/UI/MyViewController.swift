@@ -7,13 +7,14 @@
 
 import UIKit
 import SkeletonView
+import JGProgressHUD
 
 class MyViewController: UIViewController {
 
+    let hud = JGProgressHUD()
+    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
 }
 
@@ -24,12 +25,17 @@ extension MyViewController {
     }
     
     func showProgress(in startingView: UIView) {
+        
         self.view.isUserInteractionEnabled = false
+        
         if startingView.isSkeletonable {
             let gradient = SkeletonGradient(baseColor: UIColor.clouds)
-            startingView.showGradientSkeleton(usingGradient: gradient) // Gradient
+            let animation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight)
+            startingView.showAnimatedGradientSkeleton(usingGradient: gradient, animation: animation)
             
-            startingView.startSkeletonAnimation()
+        } else {
+            hud.textLabel.text = "Loading"
+            hud.show(in: startingView)
         }
     }
     
@@ -38,14 +44,27 @@ extension MyViewController {
     }
     
     func hideProgress(in startingView: UIView) {
+        
         DispatchQueue.main.async {
+            
             if startingView.isSkeletonable {
                 startingView.hideSkeleton(reloadDataAfter: true)
                 startingView.isSkeletonable = false
+                
+            } else {
+                self.hud.dismiss(afterDelay: 0.25)
             }
             
             self.view.isUserInteractionEnabled = true
         }
         
+    }
+    
+    func showError(error: Error) {
+        
+        self.hud.textLabel.text = "Error"
+        self.hud.indicatorView = JGProgressHUDErrorIndicatorView()
+        self.hud.show(in: self.view)
+        self.hud.dismiss(afterDelay: 10.0)
     }
 }

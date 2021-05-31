@@ -13,12 +13,12 @@ struct Character : Codable {
     let description : String?
     let modified : String?
     let resourceURI : String?
-//    let urls : [Urls]?
     let thumbnail : Thumbnail?
-//    let comics : Comics?
-//    let stories : Stories?
-//    let events : Events?
-//    let series : Series?
+    let comics : Container?
+    let series : Container?
+    let stories : Container?
+    let events : Container?
+//    let urls : [Urls]?
 
     enum CodingKeys: String, CodingKey {
 
@@ -27,12 +27,12 @@ struct Character : Codable {
         case description = "description"
         case modified = "modified"
         case resourceURI = "resourceURI"
-//        case urls = "urls"
         case thumbnail = "thumbnail"
-//        case comics = "comics"
-//        case stories = "stories"
-//        case events = "events"
-//        case series = "series"
+        case comics = "comics"
+        case series = "series"
+        case stories = "stories"
+        case events = "events"
+//        case urls = "urls"
     }
 
     init(from decoder: Decoder) throws {
@@ -42,12 +42,12 @@ struct Character : Codable {
         description = try values.decodeIfPresent(String.self, forKey: .description)
         modified = try values.decodeIfPresent(String.self, forKey: .modified)
         resourceURI = try values.decodeIfPresent(String.self, forKey: .resourceURI)
-//        urls = try values.decodeIfPresent([Urls].self, forKey: .urls)
         thumbnail = try values.decodeIfPresent(Thumbnail.self, forKey: .thumbnail)
-//        comics = try values.decodeIfPresent(Comics.self, forKey: .comics)
-//        stories = try values.decodeIfPresent(Stories.self, forKey: .stories)
-//        events = try values.decodeIfPresent(Events.self, forKey: .events)
-//        series = try values.decodeIfPresent(Series.self, forKey: .series)
+        comics = try values.decodeIfPresent(Container.self, forKey: .comics)
+        series = try values.decodeIfPresent(Container.self, forKey: .series)
+        stories = try values.decodeIfPresent(Container.self, forKey: .stories)
+        events = try values.decodeIfPresent(Container.self, forKey: .events)
+//        urls = try values.decodeIfPresent([Urls].self, forKey: .urls)
     }
 
 }

@@ -27,6 +27,22 @@ enum CharacterModel {
             let ext: String
             let title: String
             let desc: String
+            let opt: String?
+        }
+    }
+    
+    enum Detail {
+        
+        struct Response {
+            let character: Character?
+        }
+    
+        struct ViewModel {
+            let path: String
+            let ext: String
+            let title: String
+            let desc: String?
+            let opt: String?
         }
     }
 }

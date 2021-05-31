@@ -8,7 +8,7 @@
 import UIKit
 
 @objc protocol CharacterListSceneRoutingLogic {
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
+    func routeToCharacterDetail(segue: UIStoryboardSegue?)
 }
 
 protocol CharacterListSceneDataPassing {
@@ -22,32 +22,30 @@ class CharacterListSceneRouter: NSObject, CharacterListSceneRoutingLogic, Charac
   
     // MARK: Routing
 
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
-    //{
-    //  if let segue = segue {
-    //    let destinationVC = segue.destination as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //  } else {
-    //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-    //  }
-    //}
+    func routeToCharacterDetail(segue: UIStoryboardSegue?) {
+      
+        if let segue = segue {
+            let destinationVC = segue.destination as! CharacterDetailViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToCharacterDetail(source: dataStore!, destination: &destinationDS)
+        } else {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let destinationVC = storyboard.instantiateViewController(withIdentifier: "CharacterDetailViewController") as! CharacterDetailViewController
+            var destinationDS = destinationVC.router!.dataStore!
+            passDataToCharacterDetail(source: dataStore!, destination: &destinationDS)
+            navigateToCharacterDetail(source: viewController!, destination: destinationVC)
+        }
+    }
 
     // MARK: Navigation
 
-    //func navigateToSomewhere(source: CharacterListSceneViewController, destination: SomewhereViewController)
-    //{
-    //  source.show(destination, sender: nil)
-    //}
+    func navigateToCharacterDetail(source: CharacterListSceneViewController, destination: CharacterDetailViewController) {
+        source.show(destination, sender: nil)
+    }
 
     // MARK: Passing data
 
-    //func passDataToSomewhere(source: CharacterListSceneDataStore, destination: inout SomewhereDataStore)
-    //{
-    //  destination.name = source.name
-    //}
+    func passDataToCharacterDetail(source: CharacterListSceneDataStore, destination: inout CharacterDetailDataStore) {
+        destination.character = source.selectedCharacter
+    }
 }

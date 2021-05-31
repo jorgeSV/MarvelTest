@@ -29,10 +29,10 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="etY-cV-Gv1">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="etY-cV-Gv1">
                         <rect key="frame" x="102" y="12" width="300" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="Tiz-uS-ORl"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="Tiz-uS-ORl"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -47,8 +47,8 @@
                             <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UcS-90-l7u">
-                        <rect key="frame" x="102" y="38" width="300" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UcS-90-l7u">
+                        <rect key="frame" x="102" y="40" width="300" height="36"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="7xK-wb-hYy"/>
                         </constraints>
@@ -63,6 +63,9 @@
                                 <integer key="value" value="10"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="lastLineFillPercent">
+                                <integer key="value" value="80"/>
+                            </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tid-aP-Mla" userLabel="SeparatorView">
@@ -82,7 +85,9 @@
                     <constraint firstItem="UcS-90-l7u" firstAttribute="leading" secondItem="etY-cV-Gv1" secondAttribute="leading" id="BPO-1x-pVc"/>
                     <constraint firstItem="etY-cV-Gv1" firstAttribute="trailing" secondItem="SVU-Di-JYN" secondAttribute="trailing" constant="-12" id="CDP-nI-cgr"/>
                     <constraint firstItem="53g-Ck-B7k" firstAttribute="top" secondItem="SVU-Di-JYN" secondAttribute="top" constant="12" id="DGw-kc-lLc"/>
-                    <constraint firstItem="UcS-90-l7u" firstAttribute="top" secondItem="etY-cV-Gv1" secondAttribute="bottom" constant="5" id="Ydl-lZ-8wX"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="53g-Ck-B7k" secondAttribute="bottom" constant="12" id="WeP-B6-O5x"/>
+                    <constraint firstAttribute="bottom" secondItem="UcS-90-l7u" secondAttribute="bottom" priority="750" constant="12" id="XW3-OX-7BE"/>
+                    <constraint firstItem="UcS-90-l7u" firstAttribute="top" secondItem="etY-cV-Gv1" secondAttribute="bottom" constant="7" id="Ydl-lZ-8wX"/>
                     <constraint firstItem="Tid-aP-Mla" firstAttribute="bottom" secondItem="SVU-Di-JYN" secondAttribute="bottom" id="ZbX-TI-qGP"/>
                     <constraint firstItem="etY-cV-Gv1" firstAttribute="leading" secondItem="53g-Ck-B7k" secondAttribute="trailing" constant="18" id="ger-XR-9Hh"/>
                     <constraint firstItem="Tid-aP-Mla" firstAttribute="width" secondItem="SVU-Di-JYN" secondAttribute="width" id="iOM-Ga-X5Z"/>

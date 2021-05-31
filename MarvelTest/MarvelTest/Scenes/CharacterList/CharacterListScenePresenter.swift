@@ -23,7 +23,8 @@ class CharacterListScenePresenter: CharacterListScenePresentationLogic {
             CharacterModel.List.ViewModel(path: character.thumbnail?.path ?? "",
                                           ext: character.thumbnail?.ext ?? "",
                                           title: character.name ?? "",
-                                          desc: character.description ?? "")
+                                          desc: character.description ?? "",
+                                          opt: String.init(character.comics?.available ?? 0) + " comics" + "\n" + String.init(character.series?.available ?? 0) + " series")
         }) ?? []
         
         viewController?.displayCharacters(viewModel: viewModel, hasMoreResults: hasMoreResults)

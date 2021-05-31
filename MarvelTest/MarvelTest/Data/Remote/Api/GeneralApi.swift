@@ -16,15 +16,14 @@ struct GeneralApi {
     }
     
     static func getCharacters(request:CharacterModel.List.Request,
+                              extraID:Int? = nil,
                               onSuccess: @escaping (PaginatedList<Character>) -> (),
                               onError: @escaping (Error) -> ()) {
         
-        let completeURL = Constants.API_BASE_URL + endpoints.characters.rawValue
-        
         var requestParams = request.dictionary
-        requestParams.merge(dict: Utils.generalApiParameters())
         
-        AF.request(completeURL, parameters: requestParams).responseJSON { response in
+        AF.request(Utils.completeUrlWithEndpoint(endpoint: endpoints.characters.rawValue, extraID: extraID),
+                   parameters: Utils.mergeWithGeneralApiParameters(requestParams: &requestParams)).responseJSON { response in
             
             switch response.result {
                 
