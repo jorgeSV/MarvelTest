@@ -9,3 +9,8 @@ Se obtienen los datos del Api de Marvel, para mostrar un listado paginado de los
 Alamofire, SwiftyJSON para las conexiones de Api-rest y su parseo.
 Alamofire-image para la caché de las imágenes y mostrarlas tipo lazy. 
 SkeletonView y JGProgressHUD para indicar y amenizar los progresos de carga tanto en el listado como en el detalle.
+
+# Próximas mejoras:
+
+Vistas por código.
+Patrón Coordinator.
